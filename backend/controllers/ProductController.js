@@ -16,6 +16,10 @@ const GetProductById = async (req, res) => {
         console.error(error)
     }
 }
-
-
-module.exports = { GetAllProducts, GetProductById }
+const GetProductByIdAndUpdate = async (req, res) => {
+    const { like } = req.body
+    const one = await Product.findByIdAndUpdate(req.params.id, { like: like })
+    console.log(one, like);
+    res.json(one)
+}
+module.exports = { GetAllProducts, GetProductById, GetProductByIdAndUpdate }

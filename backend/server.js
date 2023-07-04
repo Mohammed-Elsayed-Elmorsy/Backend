@@ -1,17 +1,21 @@
 const express = require('express')
-
 require('dotenv').config()
 
+const cors = require('cors')
 const app = express()
+const bodyparser = require('body-parser')
+const cookieParser = require("cookie-parser")
+app.use(cookieParser())
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({ extended: false }))
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
     res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
     next();
 })
-const cors = require('cors')
 app.use(express.static(__dirname));
-app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://127.0.0.1:5500', '*'] }))
+app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }))
 const connectDb = require('./config/db')
 
 const router = require('./routes/Routes')

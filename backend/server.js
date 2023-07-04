@@ -8,12 +8,12 @@ const cookieParser = require("cookie-parser")
 app.use(cookieParser())
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: false }))
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-//     res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
-//     next();
-// })
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://mohammed-elsayed-elmorsy.github.io', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
+    next();
+})
 app.use(express.static(__dirname));
 app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://127.0.0.1:5500'] }))
 const connectDb = require('./config/db')
